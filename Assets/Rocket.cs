@@ -17,13 +17,20 @@ public class Rocket : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		ProcessInput();
+		Thrust();
+        Rotate();
 	}
 
-	private void ProcessInput()
+    void OnCollisionEnter(Collision collision) 
     {
-        Thrust();
-        Rotate();
+        switch (collision.gameObject.tag) 
+        {
+            case "Friendly":
+                break;
+            default:
+                print("Dead");
+                break;
+        }
     }
 
     private void Thrust()
