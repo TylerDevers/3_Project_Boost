@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour {
 
@@ -8,6 +7,9 @@ public class Rocket : MonoBehaviour {
 	AudioSource audio;
 	[SerializeField] float rcsThrust = 100f;
 	[SerializeField] float mainThrust = 100f;
+
+    enum State {Alive, Dying, Transcending};
+    State state = State.Alive;
 
 	// Use this for initialization
 	void Start () {
@@ -17,20 +19,44 @@ public class Rocket : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		Thrust();
-        Rotate();
+        if (state == State.Alive){
+            Thrust();
+            Rotate();
+        }
 	}
 
     void OnCollisionEnter(Collision collision) 
     {
+        if (state != State.Alive) 
+        {
+            return;
+        
+        }
         switch (collision.gameObject.tag) 
         {
             case "Friendly":
                 break;
+            case "Finish":
+                state = State.Transcending;
+                Invoke("LoadNextLevel", 1f);
+                break;
             default:
-                print("Dead");
+                state = State.Dying;
+                Invoke("LoadLevel1", 2f);
                 break;
         }
+    }
+
+    private void LoadLevel1()
+    {
+        SceneManager.LoadScene(0);
+        state = State.Alive;
+    }
+
+    private void LoadNextLevel()
+    {
+        SceneManager.LoadScene(1);
+        state = State.Alive;
     }
 
     private void Thrust()
