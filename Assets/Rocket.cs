@@ -11,6 +11,9 @@ public class Rocket : MonoBehaviour {
     [SerializeField] AudioClip mainEngine;
     [SerializeField] AudioClip success;
     [SerializeField] AudioClip death;
+    [SerializeField] ParticleSystem mainEngineParticle;
+    [SerializeField] ParticleSystem successParticles;
+    [SerializeField] ParticleSystem deathParticles;
 
     enum State {Alive, Dying, Transcending};
     State state = State.Alive;
@@ -57,6 +60,7 @@ public class Rocket : MonoBehaviour {
         state = State.Dying;
         audioSource.Stop();
         audioSource.PlayOneShot(death);
+        deathParticles.Play();
         Invoke("LoadFirstLevel", 2f);
     }
 
@@ -65,6 +69,7 @@ public class Rocket : MonoBehaviour {
         state = State.Transcending;
         audioSource.Stop();
         audioSource.PlayOneShot(success);
+        successParticles.Play();
         Invoke("LoadNextLevel", 1f);
     }
 
@@ -83,10 +88,12 @@ public class Rocket : MonoBehaviour {
         if (Input.GetKey(KeyCode.Space)) // can thrust while rotating
         { 
             ApplyThrust();
+            mainEngineParticle.Play();
         }
         else
         {
             audioSource.Stop();
+            mainEngineParticle.Stop();
         }
     }
 
