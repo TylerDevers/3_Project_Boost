@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementVector: {x: 10, y: 0, z: 0}
-  period: 0.5
+  period: 0
 --- !u!4 &104484550 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4927189836154858, guid: 7cf57bc32904f4de8be8a49dd5920a65,

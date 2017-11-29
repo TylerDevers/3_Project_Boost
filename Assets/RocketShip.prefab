@@ -562,13 +562,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rcsThrust: 150
-  mainThrust: 22
+  mainThrust: 100
   mainEngine: {fileID: 8300000, guid: 3cbb28c63ca8b4deab6cf52df3bcef88, type: 3}
   success: {fileID: 8300000, guid: fb47e9ac4d2284c4b976404d70281601, type: 3}
   death: {fileID: 8300000, guid: 56636ebc9ad9b4378be308adeb0400b4, type: 3}
   mainEngineParticle: {fileID: 198781289353923716}
   successParticles: {fileID: 198167840370397474}
   deathParticles: {fileID: 198127282708235846}
+  loadLevelDelay: 2
 --- !u!135 &135412051703397750
 SphereCollider:
   m_ObjectHideFlags: 1
