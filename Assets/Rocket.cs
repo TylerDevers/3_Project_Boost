@@ -18,7 +18,7 @@ public class Rocket : MonoBehaviour {
 
     enum State {Alive, Dying, Transcending};
     State state = State.Alive;
-    
+    bool noCollision = false;
 
 	// Use this for initialization
 	void Start () {
@@ -33,6 +33,12 @@ public class Rocket : MonoBehaviour {
         {
             RespondToThrustInput();
             RespondToRotateInput();
+        }
+        if (Debug.isDebugBuild) 
+        {
+            LevelCheat();
+            CollisionCheat();
+
         }
 	}
 
@@ -58,6 +64,10 @@ public class Rocket : MonoBehaviour {
 
     private void StartDeathSequence()
     {
+        if (noCollision)
+        {
+            return;
+        }
         state = State.Dying;
         audioSource.Stop();
         audioSource.PlayOneShot(death);
@@ -121,6 +131,30 @@ public class Rocket : MonoBehaviour {
             transform.Rotate(-Vector3.forward * rotationThisFrame);
         }
 		rigidBody.freezeRotation = false; //releases manual control of rotation.
+    }
+
+    void LevelCheat() 
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadNextLevel();
+        }
+    }
+
+    void CollisionCheat()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            noCollision = !noCollision;
+
+            if (noCollision)
+            {
+                print("no Collision");
+            } else 
+            {
+                print ("yes collisions");
+            }
+        }
     }
 
 }
