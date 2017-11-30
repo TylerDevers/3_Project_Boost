@@ -1,0 +1,9 @@
+{
+"TOTAL_MEMORY": 268435456,
+"dataUrl": "Boost.data.unityweb",
+"asmCodeUrl": "Boost.asm.code.unityweb",
+"asmMemoryUrl": "Boost.asm.memory.unityweb",
+"asmFrameworkUrl": "Boost.asm.framework.unityweb",
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20"
+}
